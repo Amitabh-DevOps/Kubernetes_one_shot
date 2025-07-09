@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: django-deployment
+  namespace: django-ns
+  labels:
+    app: django-notes-app
+
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: django-notes-app
+  template: 
+    metadata:
+      labels: 
+        app: django-notes-app
+    spec:
+      containers:
+        - name: django-notes-app
+          image: amitabhdevops/node-todo-app:latest
+          ports:
+            - containerPort: 8000
